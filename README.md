@@ -1,5 +1,9 @@
 # design-space-agent
 
+<p align="center">
+  <img src="assets/readme-hero.png" alt="Trust-aware engineering design-space exploration with Pareto front, feasibility, and recommended candidates" width="100%">
+</p>
+
 Local toolkit for engineering design-space exploration.
 
 design-space-agent helps engineers explore small and expensive engineering datasets by combining design-space visualization, surrogate model auditing, trust-aware candidate recommendation, Pareto analysis, feasibility checks, and decision-report generation.
