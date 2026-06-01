@@ -1,0 +1,58 @@
+project:
+  name: cooling_system_demo
+  description: Synthetic compact cooling-system design exploration
+
+data:
+  path: samples.csv
+  group_column: scenario_id
+
+variables:
+  pump_flow_lpm:
+    type: continuous
+    range: [8, 32]
+    unit: L/min
+
+  radiator_area_m2:
+    type: continuous
+    range: [0.18, 0.65]
+    unit: m^2
+
+  fan_power_w:
+    type: continuous
+    range: [40, 240]
+    unit: W
+
+  coolant_type:
+    type: categorical
+    values: [type_a, type_b, type_c]
+
+  duct_layout:
+    type: categorical
+    values: [short, balanced, extended]
+
+objectives:
+  - name: thermal_margin_degC
+    direction: maximize
+    unit: degC
+
+  - name: system_cost_jpy
+    direction: minimize
+    unit: JPY
+
+  - name: parasitic_power_w
+    direction: minimize
+    unit: W
+
+constraints:
+  - name: max_temp_constraint
+    expression: max_component_temp_degC <= 82.0
+
+  - name: pressure_drop_constraint
+    expression: pressure_drop_kpa <= 36.0
+
+recommendation:
+  candidate_pool_size: 3000
+  random_seed: 7
+  trust_penalty_weight: 0.35
+  feasibility_weight: 0.40
+  objective_weight: 0.25

@@ -1,0 +1,61 @@
+project:
+  name: vehicle_concept_demo
+  description: Synthetic early-stage vehicle concept design exploration
+
+data:
+  path: samples.csv
+  group_column: scenario_id
+
+variables:
+  battery_kwh:
+    type: continuous
+    range: [50, 120]
+    unit: kWh
+
+  motor_power_kw:
+    type: continuous
+    range: [80, 300]
+    unit: kW
+
+  vehicle_mass_kg:
+    type: continuous
+    range: [1400, 2600]
+    unit: kg
+
+  tire_type:
+    type: categorical
+    values: [eco, standard, sport]
+
+  cooling_arch:
+    type: categorical
+    values: [basic, enhanced, integrated]
+
+objectives:
+  - name: range_km
+    direction: maximize
+    unit: km
+
+  - name: cost_jpy
+    direction: minimize
+    unit: JPY
+
+  - name: mass_kg
+    direction: minimize
+    unit: kg
+
+constraints:
+  - name: accel_constraint
+    expression: accel_0_100_sec <= 8.0
+
+  - name: gradeability_constraint
+    expression: gradeability >= 0.30
+
+  - name: battery_temp_constraint
+    expression: battery_temp_max_degC <= 45.0
+
+recommendation:
+  candidate_pool_size: 5000
+  random_seed: 42
+  trust_penalty_weight: 0.35
+  feasibility_weight: 0.40
+  objective_weight: 0.25
